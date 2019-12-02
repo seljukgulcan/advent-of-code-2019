@@ -9,3 +9,4 @@ Advent of Code is a set of programming puzzles released one by one on each day o
 ## Solutions
 
 - [Day 1](day01)
+- [Day 2](day02)
