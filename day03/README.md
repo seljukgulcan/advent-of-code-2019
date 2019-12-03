@@ -6,7 +6,7 @@ The goal is to find intersection points of two traveler given two sequence of mo
 
 We can mark and store each tile that traveler 1 moved on then compare them with tiles of traveler 2. The problem with this approach is that the runtime depends on step count. If we multiple each step count with 1 million then the program takes 1 million more time to find the answer.
 
-**Full Matrix** We can allocate a 2D array large enough to hold furthest travelled tile. It has `O(N)` time and `O(N^2)` memory complexity though the given input is small enough.
+**Full Matrix** We can allocate a 2D array large enough to hold furthest travelled tile. It has `O(N)` time and `O(N^2)` memory complexity though the given input is small enough that this solution is still feasible.
 
 **Sparse Matrix** For better memory complexity, a sparse matrix can be used. We can store only the tiles of interest instead of every tile in the grid. By hashing tiles with a set, look-up time (intersection time) becomes constant. 
 
