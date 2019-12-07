@@ -130,7 +130,7 @@ if __name__ == '__main__':
             initial_input = 0 if i == 0 else None
             send_result = True if i == 4 else False
             p = multiprocessing.Process(
-                target=amplifier, args=(mem[:], phase, initial_input, recv, send, send_result, result))
+                target=amplifier, args=(mem, phase, initial_input, recv, send, send_result, result))
             p.start()
             p_lst.append(p)
 
