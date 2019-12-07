@@ -35,3 +35,46 @@ print(max_output)
 ```
 
 I'm planning to reimplement part 2 with some concurrency (`asyncio` or multithreading). I'll update if I complete that.
+
+#### Multiprocessing
+
+Just implemeted it with multiprocessing. It creates 5 processes for each permutation. It is terrible in terms of elapsed time but it simulates interpreters as it is told in the problem description and I found a change to learn a few things along the way. The main function looks like this:
+
+```python
+    result = multiprocessing.Value('i')
+    mem = list(map(int, input().split(',')))
+
+    max_value = 0
+
+    for phase_lst in permutations(range(5, 10), 5):
+
+        result.value = 0
+        recv_pipe_lst = []
+        send_pipe_lst = []
+
+        for i in range(5):
+            recv, send = multiprocessing.Pipe()
+            recv_pipe_lst.append(recv)
+            send_pipe_lst.append(send)
+
+        p_lst = []
+        phase = 1
+        for i, phase in enumerate(phase_lst):
+            recv = recv_pipe_lst[i]
+            send = send_pipe_lst[(i + 1) % 5]
+            initial_input = 0 if i == 0 else None
+            send_result = True if i == 4 else False
+            p = multiprocessing.Process(
+                target=amplifier, args=(mem[:], phase, initial_input, recv, send, send_result, result))
+            p.start()
+            p_lst.append(p)
+
+        p_lst[0].join()
+        for i in range(1, 5):
+            p_lst[i].terminate()
+
+        if result.value > max_value:
+            max_value = result.value
+
+    print(max_value)
+```
