@@ -18,7 +18,7 @@ while True:
         mode //= 10
         mode_2 = mode % 10
         mode //= 10
-        mode_3 = mode // 10
+        mode_3 = mode % 10
 
         p_1 = mem[i + 1] if mode_1 else mem[mem[i + 1]]
         p_2 = mem[i + 2] if mode_2 else mem[mem[i + 2]]

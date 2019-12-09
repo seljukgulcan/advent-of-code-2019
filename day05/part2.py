@@ -9,7 +9,7 @@ def parse_instruction(instruction):
     mode //= 10
     mode_2 = mode % 10
     mode //= 10
-    mode_3 = mode // 10
+    mode_3 = mode % 10
 
     return op_code, mode_1, mode_2, mode_3
 
